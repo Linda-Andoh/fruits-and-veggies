@@ -1,27 +1,27 @@
 const veggies = [
     {
-        name:'Broccoli',
+        name:'Beet Root',
+        color: 'Red',
+        readyToEat: true
+    },
+    {
+        name:'Spring Onion',
         color: 'Green',
         readyToEat: true
     },
     {
-        name:'Carrot',
-        color: 'Orange',
+        name:'Tomatoes',
+        color: 'Green',
         readyToEat: false
     },
     {
-        name:'Brussels Sprouts',
-        color: 'Green',
+        name:'White Onion',
+        color: 'White',
         readyToEat: true
     },
     {
-        name:'Red Onion',
-        color: 'Purple',
-        readyToEat: true
-    },
-    {
-        name:'Asparagus',
-        color: 'Green',
+        name:'Celery',
+        color: 'White',
         readyToEat: false
     }
   ];
