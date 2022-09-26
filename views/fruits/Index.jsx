@@ -10,7 +10,7 @@ const Index = (props) => {
         <h1> Index Route </h1>
 
         <a href="/fruits/new">Create a New Fruit!</a>
-
+      
         <ul>
           {
             props.fruits.map((fruit, index) => {

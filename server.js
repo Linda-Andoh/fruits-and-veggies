@@ -5,6 +5,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Fruit = require('./models/Fruit');
  const methodOverride = require('method-override');
+ const seedData = require('./models/seed');
 
 
 // -------------------------
@@ -37,6 +38,58 @@ app.use(express.urlencoded({extended:false}));
 // -------------------------
  app.use(methodOverride('_method'));
 
+
+ //................/
+// SEED ROUTE
+//................/
+
+//Clear database route(this route deletes the data) -- for testing purposes (not run by users)
+
+app.get('/fruits/clear', (req, res) => {
+  Fruit.deleteMany({}, (error, data) => {
+    if (error) {
+      console.error(error);
+    } else {
+    res.json({
+      message: 'Cleared'
+    })
+  }
+  })
+})
+
+//Seed database route(this route updates the data) -- for testing purposes (not run by users)
+
+app.get('fruits/seed', (req, res) => {
+  Fruit.insertMany(seedData, (error, createdFruits) => {
+    if (error) {
+      console.error(error);
+    } else {
+      res.json({
+        message: 'Seeded'
+      });
+    }
+  });
+});
+
+//Reset database route (this route does both the clearing and seeding) -- for testing purposes (not run by users)
+
+app.get('/fruits/reset', (req, res) => {
+  Fruit.deleteMany({}, (error, data) => {
+    if (error) {
+      console.error(error);
+    } else {
+      Fruit.insertMany(seedData, (eeror, createdFruits) => {
+        if (error) {
+          console.error(error);
+        } else {
+          res.json({
+            message: 'Reset Database'
+          });
+        }
+      });
+    }
+  });
+})
 // -------------------------
 // Fruit Routes
 // -------------------------
@@ -70,6 +123,7 @@ app.delete('/fruits/:id', (req, res) => {
 
 // Update
 
+
 app.put('/fruits/:id', (req, res) => {
   if (req.body.readyToEat === 'on') {
     req.body.readyToEat = true
@@ -85,7 +139,7 @@ app.put('/fruits/:id', (req, res) => {
         error: error
       });
     } else {
-      res.redirect(`/fruits/$req.params.id`);
+      res.redirect(`/fruits/${req.params.id}`);
     }
   });
 });
@@ -129,6 +183,10 @@ app.get('/fruits/:id', (req, res) => {
     });
   });
 });
+
+
+
+
 
 // -------------------------
 // // Veggies Routes
