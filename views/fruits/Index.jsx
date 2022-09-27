@@ -10,6 +10,8 @@ const Index = (props) => {
         <h1> Index Route </h1>
 
         <a href="/fruits/new">Create a New Fruit!</a>
+        
+        <a href="/users/logout"><button>Logout!</button></a>
       
         <ul>
           {
